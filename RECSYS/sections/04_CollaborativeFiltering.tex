@@ -1,0 +1,76 @@
+% --- Collaborative Filtering ---
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.48\textwidth}
+        \textbf{User-based CF} aims to find similar users and recommend items based on their preferences.\par
+        \begin{tabular}{lp{0.5\textwidth} l}
+            Similarity & Formula & Context \\
+            \hline
+            Cosine Similarity & $s_{ij} = \frac{\vec{i} \cdot \vec{j}}{\|\vec{i}\| \cdot \|\vec{j}\|}$ & Implicit ratings \\
+            Jaccard Similarity & $s_{ij} = \frac{\vec{i} \cap \vec{j}}{\vec{i} \cup \vec{j}}$ & Implicit ratings \\
+            Pearson Correlation & 
+            $s_{ij} = 
+            \frac{
+                \sum_{i \in I} 
+                    (r_{iu} - \bar{r}_u) \cdot
+                    (r_{iv} - \bar{r}_v)
+                }
+                {
+                    \sqrt{\sum_{i \in I} (r_{iu} - \bar{r}_u)^2} 
+                    \sqrt{\sum_{i \in I} (r_{iv} - \bar{r}_v)^2}
+                }$ & Explicit ratings \\
+        \end{tabular}
+        \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={Focus on Pearson Correlation}]
+            Pearson correlation computes similarity between a rating delta. Therefore the similarity is used to predict the delta of the rating!
+            \\
+            \begin{center}
+            $\tilde{r}_{ui} - \bar{r}_u = 
+               \frac{
+                \sum{v \in KNN(u)}(r_{vi} - \bar{r}_{v})\cdot s_{uv}
+               }
+               {
+                \sum{v \in KNN(u)} s_{uv}
+               }
+            $
+            \end{center}
+            
+
+            
+        \end{tcolorbox}
+
+        \textbf{Item-based CF} aims to find similarity between items based how many users have the same opinion about them. The similarity is obtained in the same way as for user-based CF, considering the items instead of the users.\par
+
+        \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={Memory-Based vs Model-Based}]
+            \textbf{Memory-Based:}
+            \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                \item Requires user profile in URM used to build model
+                \item Only works for "known" users
+                \item Must rebuild model for new users
+                \item Example: User-Based CF (uses user neighborhood)
+            \end{itemize}
+            
+            \textbf{Model-Based:}
+            \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                \item Works with any user profile
+                \item Supports both "known" and "unknown" users
+                \item No model recomputation needed for new users
+                \item Example: Item-Based CF (uses item similarities)
+            \end{itemize}
+        \end{tcolorbox}
+
+        \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={Association Rules}]
+            Association rules explore relationships between items using conditional probability:
+            \begin{center}
+            $P(i|j) = \frac{\text{\# appearances of i and j}}{\text{\# appearances of j} + C}$
+            \end{center}
+            where C is a shrinkage term to avoid biases. The similarity is asymmetric: $P(i|j) \neq P(j|i)$
+        \end{tcolorbox}
+
+        
+        \end{minipage}
+    };
+
+% --- Collaborative Filtering header ---
+\node[fancytitle, right=10pt] at (box.north west) {Collaborative Filtering};
+
+\end{tikzpicture}

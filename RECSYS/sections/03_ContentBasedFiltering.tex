@@ -1,0 +1,38 @@
+% --- Content-Based Filtering ---
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.48\textwidth}
+        \begin{tabular}{lp{0.7\textwidth} l}
+            \multicolumn{2}{l}{\textbf{Similarity Metrics}} \\
+            \hline
+            Basic Similarity & $s_{ij} = \vec{i} \cdot \vec{j}$ = \#common attributes \\
+            Cosine Similarity & $s_{ij} = \frac{\vec{i} \cdot \vec{j}}{\|\vec{i}\| \cdot \|\vec{j}\|}$ \\
+            Shrinked Cosine & $s_{ij} = \frac{\vec{i} \cdot \vec{j}}{\|\vec{i}\| \cdot \|\vec{j}\| + C}$ \\
+            \hline
+            \multicolumn{2}{l}{\textbf{Rating Estimation}} \\
+            \hline
+            Single Rating & $\tilde{r}_{ui} = \frac{\sum_{j \in N_k(i)} r_{uj} \cdot s_{ij}}{\sum_{j \in N_k(i)} s_{ij}}$ \\
+            Matrix Form & $\tilde{R} = R \cdot S$ \\
+            \hline
+            \multicolumn{2}{l}{\textbf{k-Nearest Neighbors (kNN)}} \\
+            \hline
+            Definition & Keep only k highest similarity values per item \\
+            Effect & Reduces noise and improves computation speed \\
+            Selection & k too small: unreliable estimates \\
+            & k too large: noisy recommendations \\
+            Formula & $\tilde{r}_{ui} = \frac{\sum_{j \in N_k(i)} r_{uj} \cdot s_{ji}}{\sum_{j \in N_k(i)} s_{ji}}$ \\
+            \hline
+            \multicolumn{2}{l}{\textbf{TF-IDF Weighting}} \\
+            \hline
+            Term Frequency & $TF_{i,a} = \frac{N_{i,a}}{N_i}$ \\
+            & $N_{i,a}$: occurrences of attribute $a$ in item $i$ \\
+            & $N_i$: attributes in item $i$ \\
+            \hline
+            Inverse Doc Freq & $IDF_a = \log_2\frac{N_{items}}{N_a}$ \\
+            & $N_{items}$: total items \\
+            & $N_a$: items with attribute $a$ \\
+        \end{tabular}
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Content-Based Filtering};
+\end{tikzpicture}

@@ -1,0 +1,106 @@
+% --- Hidden Markov Models 
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.48\textwidth}
+        \begin{tabular}{lp{0.48\textwidth} l}
+
+            % --- Hidden Markov Models ---
+            Hidden Markov Models:
+            &
+            A HMM is $(S, E, P, A, B)$:
+            \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                \item $S$ is the set of hidden states
+                \item $E$ is the set of observations
+                \item $P$ is the distribution of the initial state
+                \item $A$ is the transition probability matrix
+                \item $B$ emission probability matrix
+            \end{itemize}
+
+            \\
+        \end{tabular}
+    \end{minipage}
+};
+%------------ Hidden Markov Models Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Hidden Markov Models};
+\end{tikzpicture}
+
+
+% --- Viterbi Algorithm ---
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.48\textwidth}
+            \begin{paragraph}
+                From observations, compute the most likely sequence of hidden states:
+                \begin{equation}
+                    \arg \max P(X_{1:t} | e_{1:t}) = 
+                    \arg \max \frac{P(X_{1:t}, e_{1:t})}{P(e_{1:t})} = 
+                    \arg \max P(X_{1:t}, e_{1:t})
+                \end{equation}
+
+                Lets apply bayesan factorization:
+                \begin{equation}
+                    P(X_{1:t}, e_{1:t}) = P(X_0) \prod_{i=1}^{t} P(X_i | X_{i-1}) P(e_i | X_i)
+                \end{equation}
+
+                The solution is the one that minimize:
+                \begin{equation}
+                    - \log P(X_{1:t}, e_{1:t}) = 
+                    - \log P(X_0) + \sum_{i=1}^{t} 
+                    (- \log P(X_i | X_{i-1}) - \log P(e_i | X_i))
+                \end{equation}
+            \end{paragraph}
+            \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={Graph Construction}] 
+                Construct a graph with $1 + t \cdot n$ nodes, where $n$ is the number of hidden states with one initial node and $n$ nodes at time $i$ where $j^{th}$ node is $X_i = s_j$.
+
+                Find the shortest path from the initial node to the final node considering the weights of the edges.
+                
+                %--- Graph Construction ---
+                \begin{center}
+                \begin{tikzpicture}
+                    % Define nodes
+                    \node (X_0) at (0,0) {$X_0$};
+                    \node (X_1) at (3,1) {$X_1$};
+                    \node (X_2) at (3,0) {$X_2$};
+                    \node (X_3) at (3,-1) {$X_3$};
+                    \node (X_11) at (6,2) {$X_{11}$};
+                    \node (X_12) at (6,0) {$X_{12}$};
+                    \node (X_13) at (6,-2) {$X_{13}$};
+                    \node (X_21) at (9,2) {$X_{21}$};
+                    \node (X_22) at (9,0) {$X_{22}$};
+                    \node (X_23) at (9,-2) {$X_{23}$};
+                    % Add indices to the states
+                    \node at (0, 3) {0};
+                    \node at (3, 3) {1};
+                    \node at (6, 3) {2};
+                    \node at (9, 3) {3};
+                    % Draw edges
+                    \draw (X_0) -- node[above, font=\scriptsize, rotate=20] {$-\log P(X_0 = 1)$} (X_1);
+                    \draw (X_0) -- (X_2);
+                    \draw (X_0) -- (X_3);
+                    \draw (X_1) -- (X_11);
+                    \draw (X_1) -- (X_12);
+                    \draw (X_1) -- (X_13);
+                    \draw (X_2) -- (X_11);
+                    \draw (X_2) -- (X_12);
+                    \draw (X_2) -- (X_13);
+                    \draw (X_3) -- (X_11);
+                    \draw (X_3) -- (X_12);
+                    \draw (X_3) -- node[below, font=\scriptsize, rotate=-20] {$-\log P(X_3 | X_3) \ - \log P(e_t | X_3)$} (X_13);
+                    \draw (X_11) -- (X_21);
+                    \draw (X_11) -- (X_22);
+                    \draw (X_11) -- (X_23);
+                    \draw (X_12) -- (X_21);
+                    \draw (X_12) -- (X_22);
+                    \draw (X_12) -- (X_23);
+                    \draw (X_13) -- (X_21);
+                    \draw (X_13) -- (X_22);
+                    \draw (X_13) -- (X_23);
+    
+                \end{tikzpicture}
+                \end{center}
+            \end{tcolorbox}
+        \end{minipage}
+};
+%------------ Viterbi Algorithm Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {HMM: Viterbi Algorithm};
+\end{tikzpicture}

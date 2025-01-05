@@ -1,0 +1,116 @@
+% -- Matrix Factorization --
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.5\textwidth} l}
+                % --- Formulas for Chapter A6: Matrix Factorization ---
+                \textbf{User Rating Matrix (URM)} & 
+                \\
+                
+                \hline
+                
+                User Preference & $x_{uk}$: Preference of user $u$ for feature $k$ 
+                \\
+                Item Description & $y_{ik}$: Description of item $i$ for feature $k$
+                \\
+                Predicted Rating & $\tilde{r}_{ui} = \sum_k x_{uk} \cdot y_{ik}$ 
+                \\
+                Dimensionality Constraint & $ N_k < \frac{N_u \cdot N_i}{N_u + N_i} $
+                \\
+
+                \hline
+                % Matrix Product
+                Matrix Factorization & 
+                $R \approx X \cdot Y$ 
+                \\
+                % Dimensions
+                Dimensions & $X \in \mathbb{R}^{N_u \times N_f}, Y \in \mathbb{R}^{N_f \times N_i}, R \in \mathbb{R}^{N_u \times N_i}$
+                \\
+
+                \hline
+                % Loss Function
+                Loss Function & 
+                $\min_{X, Y} \| R - XY \|_2$
+                \\
+                % Regularization
+                Regularization & 
+                $
+                \min_{X, Y} \| R - XY \|_2 
+                + \lambda_1 \|X\|_2 + \lambda_2 \|Y\|_2
+                $
+                \\
+                \hline
+                % SGD for MF
+                SGD for MF & 
+                \begin{minipage}{0.5\textwidth}
+                    - Sample $(u, i, r_{ui})$
+                    \\
+                    - $\frac{\delta E(X,Y)}{\delta x_u} = 
+                    - 2 \cdot (r_{ui} - x_u y_{i*})  \cdot y_{i*}
+                    + 2 \lambda_1 \cdot x_u$
+                    \\
+                    - $\frac{\delta E(X,Y)}{\delta y_{i*}} = 
+                    - 2 \cdot (r_{ui} - x_u y_{i*}) \cdot x_u
+                    + 2 \lambda_2 \cdot y_{i*}$
+                \end{minipage}
+                \\
+                \hline
+                % Assumptions
+                Missing Ratings & 
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item[$\circ$] MAR: Missing As Random
+                    \item[$\bullet$] MAN: Missing As Negative
+                \end{itemize}
+                \\  
+                \hline
+                \\
+
+                % ALS alternative Least Squares Algorithm
+                ALS Algorithm & 
+                \begin{minipage}{0.5\textwidth}
+                    \texttt{While not converged do:} \\
+                    \quad \texttt{Fix $X$, Learn $Y$} \\
+                    \quad \texttt{Fix $Y$, Learn $X$} \\
+                \end{minipage}
+                \\
+                % FunkSVD Algorithm
+                $\circ$ FunkSVD Algorithm & 
+                \begin{minipage}{0.5\textwidth}
+                    \texttt{set $N_k = 0$} \\
+                    \texttt{Initialize $X, Y$} \\
+                    \texttt{While not converged do:} \\
+                    \quad \texttt{Increment $N_k$} \\
+                    \quad \texttt{Apply ALS for current $N_k$} \\
+                \end{minipage}
+                \\
+                \hline
+                \\
+                % SVD++
+                SVD++ (train with SGD)& 
+                \begin{minipage}{0.5\textwidth}
+                    - $ \tilde{r}_{ui} = \mu + b_u + b_i + \sum_{k} x_{uk} \cdot y_{ki} $
+                    \\
+                    - $ \mu^*, b_u^*, b_i^*, X^*, Y^* = \min_{\mu, b_u, b_i, X, Y} E(\dots) $
+                    
+                \end{minipage}
+                
+                \\
+                \hline
+                \\
+                % Asymmetric SVD
+                Asymmetric SVD (m-b) & 
+                $\tilde{R} = R Z Y \ , X = R Z$
+                \\
+
+                % Singular Value Decomposition
+                $\bullet$ pure SVD (m-b) & 
+                $\tilde{R} = U_k \Sigma_k V_k^T = R V_k V_k^T$
+                \\
+
+            \end{tabular}
+        \end{minipage}
+    };
+% -- Matrix Factorization Header --
+\node[fancytitle, right=10pt] at (box.north west) {Matrix Factorization};
+
+\end{tikzpicture}

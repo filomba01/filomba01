@@ -1,0 +1,99 @@
+% -- Machine Learning Item-based CF --
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.5\textwidth} l}
+                % --- Formulas for Chapter A5: Item-Based CF with a Machine Learning Approach ---
+                \textbf{Loss Functions} & 
+                \\
+                
+                \hline
+                
+                Error Metrics & MAE,MSE
+                \\
+                Accuracy Metrics & Precision, Recall
+                \\
+                Ranking Metrics & AUC, MAP
+                \\
+                \hline
+                \textbf{SLIM} (opt. Error Metric) & 
+                \\
+
+                \hline
+                % Closed-Form Solution Objective
+                Closed-Form Solution Objective &
+                $
+                S^* = \arg \min_S \left\| R - RS \right\|_2
+                $
+                \\
+                % Constraint on Similarity Matrix Diagonal
+                Constraints on S &
+                $
+                \text{diag}(S) = 0
+                $
+                \\
+
+                    % Lasso Regression Regularization
+                Lasso Regression Regularization &
+                $
+                S^* = \arg \min_S \left( \left\| R - RS \right\|_2 + \lambda \left\| S \right\|_1 \right)
+                $
+                \\
+                % Ridge Regression Regularization
+                Ridge Regression Regularization &
+                $
+                S^* = \arg \min_S \left( \left\| R - RS \right\|_2 + \lambda \left\| S \right\|_2 \right)
+                $
+                \\
+
+                % Elastic Net Regularization
+                Elastic Net Regularization &    
+                $
+                S^* = \arg \min_S \left( \left\| R - RS \right\|_2 + \lambda_1 \left\| S \right\|_1 + \lambda_2 \left\| S \right\|_2 \right)
+                $
+                \\
+
+                \hline
+                \textbf{BPR} (opt. Ranking)& 
+                \\
+                \hline
+                % Bayesian Probabilistic Ranking (BPR) Probability Function
+                (BPR) Probability Function &
+                $
+                P(\tilde{r}_{ui} > \tilde{r}_{uj} \mid \text{user } u) = \sigma(x) = \frac{1}{1 + e^{-x}}
+                $
+                \\
+
+                % Pairwise Difference for BPR
+                Pairwise Difference for BPR &
+                $
+                x_{uij} = \tilde{r}_{ui} - \tilde{r}_{uj}
+                $
+                \\
+
+            \end{tabular}
+            \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={BPR optimization}]
+                It can be demonstrated that optimizing the BPR objective function is equivalent to maximizing the AUC metric.
+                Thus, BPR is an optimization method for ranking metrics.
+                \begin{center}
+                    \begin{align}
+                        P(\tilde{r}_{ui} > \tilde{r}_{uj} \mid \text{user } u) &= P(\tilde{r}_{ui} - \tilde{r}_{uj} > 0  \mid \text{user } u) \\
+                        &= P(x_{uij} > 0 \mid \text{user } u) \\
+                        &= \sigma(x_{uij}) = \frac{1}{1 + e^{-x_{uij}}}
+                    \end{align}
+                \end{center}
+                Where $\sigma(x)$ is the sigmoid function to optimize.
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item $x_{uij}$ should tend to 1 if i is a relevant item for user u and j is not
+                    \item $x_{uij}$ should tend to 0 if both items are not relevant for user u or either both relevant
+                \end{itemize}
+            \end{tcolorbox}
+        \end{minipage}
+    };
+% -- Machine Learning Item-based CF Header --
+\node[fancytitle, right=10pt] at (box.north west) {Machine Learning Item-based CF};
+
+
+\end{tikzpicture}
+
+

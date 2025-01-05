@@ -1,0 +1,81 @@
+%------------ Dynamic Bayesian Networks ---------------
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.48\textwidth}
+        \begin{tabular}{lp{0.48\textwidth} l}
+            % --- Markov Chain ---
+            (first Order) Markov Chain:
+            & $P(X_{t+1} | X_t, X_{t-1}, ..., X_1) = P(X_{t+1} | X_t)
+            $
+
+            \\
+
+            % --- Stationary Event ---
+            Stationary Event:
+            & $P(X_{t+1} = j| X_t = i) = p_{ij} \ \forall t$ 
+            
+            \\
+
+            % --- Transition Matrix ---
+            Transition Matrix:
+            &  $P = \begin{bmatrix} p_{11} & ... & p_{1n} \\ ... & ... & ... \\ p_{n1} & ... & p_{nn} \end{bmatrix}$ \
+            $\sum_{j=1}^{n} p_{ij} = 1$ 
+            
+            \\
+
+            % --- Probability at step n ---
+            Probability at step n:
+            & $P_{ij}(n) = P^n(i,j)$ 
+            
+            \\
+
+            % --- Definitions ---
+            Reachability:
+            & A state $j$ is reachable from $i$ if there exists a path from $i$ to $j$ \\
+
+            Communicability:
+            & States $i$ and $j$ communicate if each is reachable from the other \\
+
+            Absorbing State:
+            & A state $i$ is absorbing if $p_{ii} = 1$ \\
+
+            Transient State:
+            & A state $i$ is transient if it is reachable from another state $j$ but not vice versa. \\
+
+            Recurrent State:
+            & A state $i$ is recurrent if it is not transient. \\
+
+            Ergodic Markov Chain:
+            & A Markov Chain is ergodic if it is:
+            
+            \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                \item Recurrent
+                \item Aperiodic
+                \item All states communicate
+            \end{itemize} 
+            
+            \\
+
+            % --- Steady State Distribution ---
+            Steady State Distribution:
+            & $\pi = \lim_{n \to \infty} P^n$ 
+            
+            \\
+
+            % --- Expected Transient Time ---
+            Expected Transient Time:
+            & $m_{ij} = 1 + \sum_{k \neq j} p_{ik} m_{kj}$ 
+            
+            \\
+
+            % --- Absorbing Markov Chain ---
+            Absorbing Markov Chain:
+            & $P = \begin{bmatrix} Q & R \\ 0 & 1 \end{bmatrix}$ \
+            $Q$ transient states, $R$ absorbing states.
+
+        \end{tabular}
+        \end{minipage}
+    };
+    %------------ Dynamic Bayesian Networks Header ---------------------
+    \node[fancytitle, right=10pt] at (box.north west) {Markov Chains};
+    \end{tikzpicture}

@@ -1,0 +1,52 @@
+% -- Hybrid Recommenders --
+\begin{tikzpicture}
+    \node [mybox] (box) {
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.5\textwidth} l}
+                Linear Combination & 
+                \hfill \includegraphics[width=0.35\textwidth]{imgs/071_LinearCombination.png}
+                \\
+                \hline
+                List Combination & 
+                \hfill \includegraphics[width=0.35\textwidth]{imgs/072_ListCombination.png}
+                \\
+                \hline
+                Pipelining & 
+                \hfill \includegraphics[width=0.35\textwidth]{imgs/073_Pipelining.png}
+                \\
+                \hline
+                Model Merging & 
+                \hfill \includegraphics[width=0.35\textwidth]{imgs/074_ModelMerging.png}
+                \\
+                \hline
+                Co-Training & 
+                \hfill \includegraphics[width=0.35\textwidth]{imgs/075_CoTraining.png}
+                \\
+                \hline
+                % --- SSLIM ---
+                \\
+                \textbf{SSLIM} (Co-Training Technique)&  
+                \\
+                Optimization &
+                $
+                    S^* = \min_S \alpha ||R - RS ||^2_F + (1 - \alpha) ||F - SF ||^2_F
+                $
+                \\
+                Rating Prediction &
+                $
+                    \hat{r}_{ui} = \frac{\sum_j s_{ji} r_{uj}}{\sum_j s_{ji}}
+                $
+                \\
+                Feature Prediction &
+                $
+                    \hat{f}_{ik} = \sum_j s_{ij} f_{jk}
+                $
+            \end{tabular}
+        \end{minipage}
+    };
+
+\node[fancytitle, right=10pt] at (box.north west) {Hybrid Recommenders};
+\end{tikzpicture}
+
+
+

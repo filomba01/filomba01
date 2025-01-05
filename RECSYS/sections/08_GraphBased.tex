@@ -1,0 +1,108 @@
+\begin{tikzpicture}
+    \node [mybox] (box) {
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.5\textwidth}}
+                \textbf{Random Walk Probability} & 
+                $p_{ij} = \frac{g_{ij}}{\sum_j g_{ij}}$
+                
+                $
+                    d_i = \sum_j g_{ij}
+                $
+                \\
+                \textbf{Next Step Probability} & 
+                $\Pi_i^{k+1} = \sum_j \Pi_j^k \cdot p_{ji}$
+                \\
+                \textbf{Matrix Form} & 
+                $\Pi^{k+1} = P \cdot \Pi^k$
+                \\
+                \textbf{Steady State} & 
+                $\Pi = P \cdot \Pi$
+                \\
+                \textbf{Probability Constraint} & 
+                $\sum \Pi_i = 1$
+                \\
+                \hline
+                \textbf{Matrix G} &
+                \hfill \includegraphics[width=0.35\textwidth]{imgs/08_MatrixG.png}
+                \\
+            \end{tabular}
+                        
+        \end{minipage}
+    };
+    
+    \node[fancytitle, right=10pt] at (box.north west) {Graph-Based Recommenders};
+\end{tikzpicture}
+
+\vspace{1cm}
+
+\begin{tikzpicture}
+    \node [mybox] (box) {
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.5\textwidth} l}
+                \textbf{PageRank} & \\
+                Random Walk and Restart & 
+                $
+                    \prod = \gamma \prod \cdot P + (1-\gamma) \prod_{0}
+                $
+                \\
+                \hline
+                \textbf{P3Alpha $P_3\alpha$} & \\
+                Metapath & $U \rightarrow I \rightarrow U \rightarrow I$\\
+                
+                Probability & 
+                $
+                    P_{UI} = (diag(\frac{1}{d_u}) \cdot R)^\alpha
+                $
+
+                $
+                    P_{IU} = (diag(\frac{1}{d_i}) \cdot R^T)^\alpha
+                $
+                \\
+                Recommendation & 
+                $
+                    \prod = \gamma \prod \cdot P^3
+                $
+
+                $
+                    = \gamma \prod \cdot P_{UI} \cdot P_{IU} \cdot P_{UI}
+                $
+
+                $
+                    = \gamma \prod \cdot P_{UI} \cdot S
+                $
+                \\
+                Disadvantages & Strong popularity bias 
+
+                \\
+                \hline
+                \textbf{RP3Beta $RP_3\beta$} & (penalize popular items)
+
+                \\
+                Similarity & 
+                $
+                    S_{ij} = 
+                    \frac   {1}
+                            {d_j^\beta} 
+                    \sum_{u \in U} 
+                            (\frac{r_{ui} r_{uj}}{d_i d_j})^\alpha
+                $
+
+            \end{tabular}
+
+            \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={Cosine Similarity Correlation}]
+                As seen above, without the parameter $\alpha$, the random walk will end up building the same similarity matrix $S$ as the one obtained by the cosine similarity (for \textbf{implicit ratings}).
+                \begin{center}
+                $
+                    S_{ij} = 
+                    [P_{IU} \cdot P_{UI}]_{ij} 
+                    = \sum_{u \in U} \frac{r_{ui} r_{uj}}{d_i d_j} 
+                $
+                \end{center}
+            \end{tcolorbox}
+
+                        
+        \end{minipage}
+    };
+    
+    \node[fancytitle, right=10pt] at (box.north west) {Graph-Based - 2};
+\end{tikzpicture}

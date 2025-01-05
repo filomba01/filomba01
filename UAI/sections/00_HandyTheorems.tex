@@ -1,0 +1,46 @@
+% --- Handy Theorems 
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.48\textwidth}
+        \begin{tabular}{lp{0.48\textwidth} l}
+
+            % --- Handy Theorems ---
+            Chain Rule:
+            &
+            $P(X_1, X_2) = P(X_1 | X_2) P(X_2)$
+            
+            \\
+            
+            Marginalization:
+            &
+            $P(X_1) = \sum_{x \in X_2} P(X_1, X_2 = x)$
+            
+            \\
+            
+            Bayes Rule:
+            &
+            $P(X_1 | X_2) = \frac{P(X_2 | X_1) P(X_1)}{P(X_2)}$
+            
+            \\
+
+            1.
+            &
+            $P(X_1 | X_2) = \frac{P(X_2 | X_1) \cdot P(X_1)}{
+                \sum_{x \in X_1} P(X_2 | X_1 = x) \cdot P(X_1 = x)
+            }$
+
+            \\
+            
+            2. &
+            $P(X_1 | X_2, X_3) = \frac{P(X_2 | X_1, X_3) \cdot P(X_1 | X_3)}{P(X_2 | X_3)}$
+            
+            \\
+            
+            3. &
+            $P(X_1 = x | X_2) = \frac{P(X_2 | X_1 = x) \cdot P(X_1 = x)}{P(X_2)}$
+        \end{tabular}
+    \end{minipage}
+};
+%------------ Handy Theorems Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Handy Theorems};
+\end{tikzpicture}

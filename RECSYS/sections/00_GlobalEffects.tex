@@ -1,0 +1,32 @@
+% --- Handy Theorems 
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.48\textwidth}
+        \begin{tabular}{lp{0.48\textwidth} l}
+            1. Global Bias $\mu$ &
+            $\mu = \frac{\sum_{u,i \in T} r_{ui}}{N_T + C}$
+            \\
+            2. Normalization $r_{ui}'$ &
+            $r_{ui}' = r_{ui} - \mu$
+            \\
+            3. Item Shrink Average Rating $b_i$ &
+            $b_i = \frac{\sum_{u,i \in T} r_{ui}'}{N_T + C}$
+            \\
+            4. Normalization (Again) &
+            $r_{ui}'' = r_{ui}' - b_i \ \forall u \in U, i \in I$
+            \\
+            5. User Shrinked Average Rating $b_u$ &
+            $b_u = \frac{\sum_{i \in I} r_{ui}''}{N_T}$
+            \\
+        \end{tabular}
+        \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={Rating Estimation}]
+            We can estimate a rating in a NON-PERSONALIZED way using the global effects:
+            \begin{center}
+                $r_{ui} = \mu + b_u + b_i$
+            \end{center}
+        \end{tcolorbox}
+    \end{minipage}
+};
+%------------ Handy Theorems Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Global Effects};
+\end{tikzpicture}

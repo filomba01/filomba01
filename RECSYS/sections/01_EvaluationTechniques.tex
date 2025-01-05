@@ -1,0 +1,28 @@
+% --- Evaluation Techniques ---
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.48\textwidth}
+        \begin{tabular}{lp{0.7\textwidth} l}
+            \multicolumn{2}{l}{\textbf{Online Evaluation}} \\
+            \hline
+            Direct Feedback & User questionnaires (high bias) \\
+            A/B Testing & Compare $RS_1$ vs $RS_2$ with unaware users \\
+            Controlled Exp. & Small aware group, mock-up testing \\
+            Crowdsourcing & Large volunteer group with compensation \\
+            \hline
+            \multicolumn{2}{l}{\textbf{Offline Evaluation}} \\
+            \hline
+            Tasks & Rating Prediction,Top-N \\
+            Dataset Split & Training Set $\rightarrow$ Model Creation \\
+            & User Profile $\rightarrow$ Rating Generation \\
+            & Testing Set → Evaluation \\
+            \hline
+            \multicolumn{2}{l}{\textbf{Dataset Partitioning}} \\
+            \hline
+            Hold out of Ratings & Random \% of ratings for testing, Risk of overfitting \\
+            Hold out of Users & Exclude users for training, Split excluded users' ratings between profile/testing \\
+        \end{tabular}
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Evaluation Techniques};
+\end{tikzpicture}
