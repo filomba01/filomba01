@@ -1,0 +1,129 @@
+\begin{tikzpicture}
+    \node [mybox] (box){
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.65\textwidth}}
+                \textbf{Concentration} & \\
+
+                \hline
+                Concentration Effect & The recommender made popular items more popular.
+                
+                \\
+                Gini Coefficient & 
+
+                $
+                    G(y) = \frac{
+                        \sum_{i=1}^{N} \sum_{j=1}^{N} |y_i - y_j|
+                    }{
+                        2 N^2 \bar{y}
+                    }
+                $
+                
+                $
+                \begin{cases}
+                    G(y) \approx 0 \implies \text{even distribution} \\
+                    G(y) \approx 1 \implies \text{concentration}
+                \end{cases}
+                $
+                \\
+
+                In our case &
+                $
+                    \begin{cases}
+                    G_R(y) < G_I(y) \implies \text{dispersion} \\
+                    G_R(y) > G_I(y) \implies \text{concentration}
+                    \end{cases}
+                $
+                \\
+
+                \textbf{Diversification} & Reranking 
+                \\
+                \hline
+
+                MMR &
+                $
+                    \arg \max_{i \in R \setminus S} [
+                        \lambda Sim^{us}(i,u) 
+                        - (1 - \lambda) \max_{j \in S} Sim^{it}(i,j)
+                    ]
+                $
+
+                $
+                    \begin{cases}
+                        \lambda \ large \implies \text{only care about relevance} \\
+                        \lambda \ small \implies \text{only care about diversity}
+                    \end{cases}
+                $
+                \\
+
+                Adomavicius \& Kwon &
+                
+                $
+                    rank_u'(i,t) = \begin{cases}
+                        rank^{(pop)}(i) \ \text{if } r(u,i) \geq t \\
+                        \alpha_u + rank_u(i) \ \text{otherwise}
+                    \end{cases}
+                $
+
+                \\
+                \textbf{Spotify} & Computing if user is specialist 
+                \\
+                \hline
+
+
+                User representation &
+                $
+                    \gamma_u = \frac{1}{|H|}
+                    \sum_{j=1}^{|H|} \gamma_{H_j}
+                $
+
+                \\
+
+                Generalist - Specialist &
+                $
+                    GS(u) = \frac{1}{|H|}
+                    \sum_{j=1}^{|H|} 
+                        \frac{\gamma_{H_j} \cdot \gamma_u}
+                        {||\gamma_{H_j}|| || \gamma_u ||}
+                $
+
+                $
+                    \begin{cases}
+                        GS(u) \approx 0 \implies \text{generalist} \\
+                        GS(u) \approx 1 \implies \text{specialist}
+                    \end{cases}
+                $
+
+                Inactive users tends to be specialist.
+
+                \\
+
+                \textbf{Calibration} & Calibrate similar attribute proportions 
+                \\
+                \hline
+                
+                KL divergence &
+                $
+                    KL(p,q) = \sum_g 
+                                p(g | u) \log \frac{p(g | u)}{q(g | u)}
+                $
+
+                Where:
+
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item $p$ is the historical distribution of attribute g for user $u$ 
+                    \item $q$ is the current distribution of attribute g for user $u$.
+                \end{itemize}
+
+                Means: $p$ and $q$ should match.
+
+                \\
+
+                
+
+
+            \end{tabular}
+        \end{minipage}
+    };
+
+\node[fancytitle, right=10pt] at (box.north west) {Etics};
+\end{tikzpicture}

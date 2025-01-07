@@ -1,0 +1,70 @@
+\begin{tikzpicture}
+    \node [mybox] (box){
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.65\textwidth}}
+                CARS & Context-Aware Recsys \\
+                \hline
+                
+                Rating Tensor & 
+                $
+                    \tilde{R} = X \cdot Y \cdot Z \ \ Z \in \mathbb{R}^{|F| \times |K|}
+                $
+                \\
+
+                Loss function & 
+                $
+                    \arg \min_{X,Y,Z}
+                        || R - \tilde{R} ||_2 +
+                        \lambda_1 || X ||_2 +
+                        \lambda_2 || Y ||_2 +
+                        \lambda_3 || Z ||_2
+                $
+                \\
+
+                \textbf{Session-based} & \\
+                \hline
+                &
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item Anonymous users
+                    \item can only optimize short-term preferences
+                    \item Is \textbf{Session-aware}, if past sessions are available. 
+                        \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                            \item can optimize long-term preferences
+                        \end{itemize}
+                \end{itemize}
+                \\
+
+                \textbf{Knowledge-based} & \\
+                \hline
+                &
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item Explicitly encode additional knoledge, requires knoledge engineering
+                    \item Useful for certain domains (chatbots, conversational systems)
+                \end{itemize}
+                \\
+
+                \textbf{Sequence-Aware} & When sequence matters \\
+                \hline
+                Input &
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item if CF, is a set of user interactions
+                    \item Rely on a specific sequence of interactions, not on a session.
+                    \item[$\times$] cannot use URM!
+                \end{itemize}
+                \\
+                Goal & Predict the next item in the sequence
+                \\
+                Approach & 
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item Basics: CO-occurrence, Markov Chains, Heuristic
+                    \item KNN: find past sessions similar.
+                    \item Sequence-learning: Embedding, RNN, Attention.
+                \end{itemize}
+                \\
+
+            \end{tabular}
+        \end{minipage}
+    };
+
+    \node[fancytitle, right=10pt] at (box.north west) {Beyond CF};  
+\end{tikzpicture}
