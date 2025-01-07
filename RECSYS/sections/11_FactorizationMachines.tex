@@ -1,0 +1,85 @@
+\begin{tikzpicture}
+    \node [mybox] (box){
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.8\textwidth}}
+                Input Data &
+                $
+                    \begin{matrix} 
+                        \text{user} & \text{item} & \text{rating} \\
+                        1, 0, 0 & 1, 0, 0 & 3 \\
+                        0, 1, 0 & 0, 1, 0 & 1 \\
+                        \vdots & \vdots & \vdots \\
+                        0, 0, 1 & 0, 0, 1 & 2 
+                    \end{matrix}
+                $ One hot encoding.
+                
+                \\
+                Rating Estimation  &
+                $
+                    \tilde{r}^{(k)} = \omega_0 
+                                    + \sum_{i=1}^n \omega_i x_i^{(k)}
+                                    + \sum_{i=1}^n \sum_{j=i + 1}^n \omega_{ij} x_i^{(k)} x_j^{(k)}
+                $
+
+                \\
+                Vector Form &
+                $
+                    \tilde{r}^{(k)} = \omega_0 + \vec{\omega} \cdot \vec{x}^{(k)} + \vec{x}^{(k)T} \cdot W \cdot \vec{x}^{(k)}
+                $
+                
+                \\
+                Loss Function &
+                $
+                    \arg \min_{\vec{\omega}} E(\omega) = \arg \min_{\vec{\omega}} || r^{(k)} - \tilde{r}^{(k)} ||
+                $
+
+                \\
+
+                $W$ factorization &
+
+                $
+                    \omega_{ij} = \vec{v}_i \cdot \vec{v}_j 
+                                = \sum_{h=0}^f v_{i,h} v_{j,h}
+                $
+                $
+                    f << n \  \text{latent factors}
+                $
+
+                \\
+                N parameters &
+                $
+                    \begin{cases}
+                        1 + n + \frac{n^2 - n}{2} & \text{if not factorized} \\
+                        1 + n + nf & \text{if factorized} 
+                    \end{cases}
+                $
+                
+                \\
+                Imbalance Problem &
+                \begin{itemize}[label={}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item[$\times$] If ratings are implicit, lead to predict only $1$s
+                    \item [$\checkmark$] Random select non rated items for every user
+                    \item [$\checkmark$] Use the same number of positive and negative samples
+                \end{itemize}
+                \\
+            \end{tabular}
+
+            \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={Factorization Machines as SVD++}]
+                Using only collaborative data, the factorization machine is equivalent to SVD++, since one-hot encoding we can rewrite the factorization machine as:
+                \\
+                \begin{equation}
+                    \tilde{r}^{(k)} = \omega_0 + \omega_i 
+                                    + \omega_u +
+                                        + V_i \cdot V_u^T  
+                \end{equation}
+                \\
+                Equivalent to SVD++.
+
+                We need to add \textbf{Context} data, for example from a ICM model.
+            \end{tcolorbox}
+        \end{minipage}
+    };
+
+
+\node[fancytitle, right=10pt] at (box.north west) {Factorization Machines};
+\end{tikzpicture}
