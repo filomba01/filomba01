@@ -35,7 +35,7 @@
                 $
                 \\
 
-                \textbf{Diversification} & Reranking 
+                \textbf{Diversification} & Variety 
                 \\
                 \hline
 
@@ -54,7 +54,9 @@
                     \end{cases}
                 $
                 \\
-
+                \textbf{Diversification} & Different items recommended to different users 
+                \\
+                \hline
                 Adomavicius \& Kwon &
                 
                 $
@@ -63,6 +65,8 @@
                         \alpha_u + rank_u(i) \ \text{otherwise}
                     \end{cases}
                 $
+
+                Recommend items that the user likes but are not popular.
 
                 \\
                 \textbf{Spotify} & Computing if user is specialist 
@@ -75,6 +79,20 @@
                     \gamma_u = \frac{1}{|H|}
                     \sum_{j=1}^{|H|} \gamma_{H_j}
                 $
+                
+                $
+                    \gamma_i = \text{ Item representation}
+                $
+
+                $
+                    \gamma_u = \text{ User representation 
+                    }
+                $
+                
+                Average of user's listening history.
+                
+
+                
 
                 \\
 
