@@ -11,7 +11,7 @@
             \hline
             \multicolumn{2}{l}{\textbf{Rating Estimation}} \\
             \hline
-            Single Rating & $\tilde{r}_{ui} = \frac{\sum_{j \in N_k(i)} r_{uj} \cdot s_{ij}}{\sum_{j \in N_k(i)} s_{ij}}$ \\
+            Single Rating & $\tilde{r}_{ui} = \frac{\sum_{j} r_{uj} \cdot s_{ij}}{\sum_{j} s_{ij}}$ \\
             Matrix Form & $\tilde{R} = R \cdot S$ \\
             \hline
             \multicolumn{2}{l}{\textbf{k-Nearest Neighbors (kNN)}} \\
@@ -20,7 +20,7 @@
             Effect & Reduces noise and improves computation speed \\
             Selection & k too small: unreliable estimates \\
             & k too large: noisy recommendations \\
-            Formula & $\tilde{r}_{ui} = \frac{\sum_{j \in N_k(i)} r_{uj} \cdot s_{ji}}{\sum_{j \in N_k(i)} s_{ji}}$ \\
+            Formula & $\tilde{r}_{ui} = \frac{\sum_{j, i \in N_k(j)} r_{uj} \cdot s_{ji}}{\sum_{j, i \in N_k(j)} s_{ji}}$ \\
             \hline
             \multicolumn{2}{l}{\textbf{TF-IDF Weighting}} \\
             \hline

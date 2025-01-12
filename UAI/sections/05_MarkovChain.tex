@@ -2,7 +2,7 @@
 \begin{tikzpicture}
     \node [mybox] (box){%
         \begin{minipage}{0.48\textwidth}
-        \begin{tabular}{lp{0.48\textwidth} l}
+        \begin{tabular}{lp{0.50\textwidth} l}
             % --- Markov Chain ---
             (first Order) Markov Chain:
             & $P(X_{t+1} | X_t, X_{t-1}, ..., X_1) = P(X_{t+1} | X_t)
@@ -40,12 +40,13 @@
             & A state $i$ is absorbing if $p_{ii} = 1$ \\
 
             Transient State:
-            & A state $i$ is transient if it is reachable from another state $j$ but not vice versa. \\
+            & A state $i$ is transient if $\exists j$ reachable from $i$ but not vice versa. \\
 
             Recurrent State:
             & A state $i$ is recurrent if it is not transient. \\
 
-            Ergodic Markov Chain:
+            Ergodic Markov Chain \\
+            \hline
             & A Markov Chain is ergodic if it is:
             
             \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
@@ -69,9 +70,31 @@
             \\
 
             % --- Absorbing Markov Chain ---
-            Absorbing Markov Chain:
-            & $P = \begin{bmatrix} Q & R \\ 0 & 1 \end{bmatrix}$ \
-            $Q$ transient states, $R$ absorbing states.
+            Absorbing Markov Chain & \\
+            \hline
+            & $P = \begin{bmatrix} Q & R \\ 0 & 1 \end{bmatrix}$
+            
+            $Q$ transient states, 
+            
+            $R$ absorbing states.
+
+            \\
+
+            Expected time trans s $i$ from trans $j$ & 
+
+            $
+                ij^{th} \text{ element of } (I - Q)^{-1}
+            $
+            
+            \\
+
+            Expected time abs $j$ from trans $i$ & 
+
+            $
+                ij^{th} \text{ row of } (I - Q)^{-1} R
+            $
+
+
 
         \end{tabular}
         \end{minipage}

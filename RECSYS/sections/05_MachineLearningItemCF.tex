@@ -2,7 +2,7 @@
 \begin{tikzpicture}
     \node [mybox] (box){%
         \begin{minipage}{0.48\textwidth}
-            \begin{tabular}{lp{0.5\textwidth} l}
+            \begin{tabular}{lp{0.55\textwidth} l}
                 % --- Formulas for Chapter A5: Item-Based CF with a Machine Learning Approach ---
                 \textbf{Loss Functions} & 
                 \\
@@ -71,6 +71,26 @@
                 $
                 \\
 
+                Loss Function &
+                $
+                \arg \max_{\theta} \prod_{(u,i,j)} P(x_{uij}(\theta) > 0 \mid  u)
+                $
+                \\
+                Log-Likelihood: &
+                $
+                \arg \max_{\theta} \sum_{(u,i,j)}  \log(P(x_{uij}(\theta) > 0 \mid  u))
+                $
+                \\
+                Loss Minimization: &
+                $
+                \arg \min_{\theta} - \sum_{(u,i,j)} \log(\sigma(x_{uij}(\theta))) + \lambda ||\theta||_2 \ldots
+                $
+                \\
+                \hline
+                \textbf{LightGCN} &
+                \\
+                \hline
+
             \end{tabular}
             \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={BPR optimization}]
                 It can be demonstrated that optimizing the BPR objective function is equivalent to maximizing the AUC metric.
@@ -87,6 +107,10 @@
                     \item $x_{uij}$ should tend to 1 if i is a relevant item for user u and j is not
                     \item $x_{uij}$ should tend to 0 if both items are not relevant for user u or either both relevant
                 \end{itemize}
+                % red color
+                \textcolor{red}{
+                    NB: BPR suffers from popularity bias.
+                }
             \end{tcolorbox}
         \end{minipage}
     };

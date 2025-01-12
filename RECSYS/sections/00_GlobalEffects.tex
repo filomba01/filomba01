@@ -4,19 +4,27 @@
         \begin{minipage}{0.48\textwidth}
         \begin{tabular}{lp{0.48\textwidth} l}
             1. Global Bias $\mu$ &
-            $\mu = \frac{\sum_{u,i \in T} r_{ui}}{N_T + C}$
+            $\mu = \frac{\sum_u \sum_{i}r_{ui}}{N + C}$
+
+            $
+                N = \# \text{non-zero ratings}
+            $
             \\
             2. Normalization $r_{ui}'$ &
             $r_{ui}' = r_{ui} - \mu$
             \\
             3. Item Shrink Average Rating $b_i$ &
-            $b_i = \frac{\sum_{u,i \in T} r_{ui}'}{N_T + C}$
+            $b_i = \frac{\sum_{u} r_{ui}'}{N_i + C}$
+
+            $
+                N_i = \text{number of Users who rated item } i
+            $
             \\
             4. Normalization (Again) &
-            $r_{ui}'' = r_{ui}' - b_i \ \forall u \in U, i \in I$
+            $r_{ui}'' = r_{ui}' - b_i \ \forall u \in U, i \in I$    
             \\
             5. User Shrinked Average Rating $b_u$ &
-            $b_u = \frac{\sum_{i \in I} r_{ui}''}{N_T}$
+            $b_u = \frac{\sum_{i \in I} r_{ui}''}{N_u}$
             \\
         \end{tabular}
         \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={Rating Estimation}]

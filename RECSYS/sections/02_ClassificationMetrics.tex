@@ -6,12 +6,15 @@
             Metric & Description \\
             \hline
             Relevance & Ability of recommending items that the user likes \\
+            Diversity & Ability of recommending different items \\
+            Serendipity & Ability of recommending unexpected items \\
             Coverage & Ability of recommending items that the user has not seen \\
             Novelty & Ability of recommending unknown items \\
-            Diversity & Ability of recommending different items \\
             Consistency & Ability to give consistent recommendations \\
             Confidence & Measure how much the model is sure about its recommendations \\
-            Serendipity & Ability of recommending unexpected items \\
+            Scalability & Time required for training \\
+            Serving Time & Time required for serving recommendations \\
+            Fairness & Fair recommendation for all users and for content providers \\
         \end{tabular}
         \end{minipage}
     };
@@ -28,7 +31,7 @@
             \includegraphics[height=0.1\textheight]{imgs/02_metrics.png}
         \end{center}
         \begin{tabular}{lp{0.8\textwidth} l}
-            Metrics & Formula \\
+            Classification Metrics & Formula \\
             \hline
             Recall & $\frac{TP}{FN + TP}$ 
             \\
@@ -38,7 +41,8 @@
             
             Fallout & $\frac{FP}{FP + TN}$ 
             \\
-            
+            Ranking Metrics & \\
+            \hline
             AUC & $\frac{\sum_{k} Recall(k) \cdot \Delta Fallout}{N_i}$ 
             \\
             

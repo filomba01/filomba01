@@ -38,6 +38,12 @@
             
         \end{tcolorbox}
 
+        \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={The Top-N Scenario}]
+            Normalizing the predicted rating is necessary to improve rating prediction.
+
+            In a Top-N scenario, we can compute the rating $\tilde{r}_{ui}$ without normalization to save computation!
+        \end{tcolorbox}
+
         \textbf{Item-based CF} aims to find similarity between items based how many users have the same opinion about them. The similarity is obtained in the same way as for user-based CF, considering the items instead of the users.\par
 
         \begin{tcolorbox}[colback=gray!5, colframe=gray!80!black, title={Memory-Based vs Model-Based}]

@@ -1,0 +1,142 @@
+\begin{tikzpicture}
+    \node [mybox] (box){
+        \begin{minipage}{0.48\textwidth}
+        \begin{tabular}{lp{0.70\textwidth} }
+            \textbf{Training} & \\
+            \hline
+            &
+            Initialize user and item embeddings $ E^{(0)} $
+            \begin{enumerate}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                \item Sample a data point (depends on loss function)
+                \item Apply $h$ hops of graph convolution on the nodes $E^{(h)}$
+                \item Using $E^{(h)}$ compute the prediction and gradients
+                \item Repeat!
+            \end{enumerate}
+            learn is $ E^{(0)} $
+            predict is $ E^{(h)} $.
+            The “message” is the node embedding.
+            \\
+            \textbf{LightGCN} & \\
+            \hline
+            &
+            - weighted mean as aggregation function
+
+            - Loss function is BPR
+            
+            - Does not include self-connections
+      
+            \\
+            &
+            $
+                E_u^{(h)} = \sum_{i:u,i \in R^+} \frac{1}{\sqrt{d_u \cdot d_i}}\cdot E_i^{(h-1)}
+            $
+
+            $
+                E_i^{(h)} = \sum_{u:u,i \in R^+} \frac{1}{\sqrt{d_u \cdot d_i}}\cdot E_u^{(h-1)}
+            $ 
+            \\
+            &
+            normalized adjacency matrix $\hat{G}$:
+
+            $
+                \hat{g}_{xy}= \frac{g_{xy}}{\sqrt{d_x d_y}}
+            $
+            \\
+            \textbf{Training} & LightGCN\\
+            \hline
+            &
+            Initialize the embeddings $ E^{(0)} $
+            \begin{enumerate}[topsep=0cm, parsep=0cm, itemsep=0cm]
+                \item Apply $h$ convolution steps $E^{(h)} = \hat{G}^h \cdot E^{(0)}$
+                \item Draw a BPR sample $u,i,j$ such that $u,i \in R^+$ and $u,j \in R^-$
+                \item Compute prediction $\tilde{r}_{ui} =  E_u^{(h)} \cdot  E_i^{(h)}$ and $\tilde{r}_{uj}$
+                \item Apply gradient of BPR
+            \end{enumerate}
+            \\
+
+            Pros and Cons & 
+            \begin{itemize}[label={}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                \item[$\checkmark$] Can work on different types of graphs
+                \item[$\checkmark$] Can accommodate different aggregationfunctions that may have parameters themselves
+                \item[$\checkmark$] Can accommodate different lossfunctions
+                \item[$\times$] Have enormous computational cost
+                \item[$\times$] Can exhibit high popularity bias
+            \end{itemize}
+            \\
+
+            \textbf{Popularity Bias} & \\
+            \hline
+            
+            $\hat{G}$ with SVD
+            &
+            \begin{center}
+            $
+                E^{(h)} = \hat{G} ^h \cdot E^{(0)} 
+            $    
+
+            $
+                = (V \cdot \Sigma \cdot V^T )^h \cdot E^{(0)} 
+            $
+
+            $    
+                = V \cdot \Sigma^h \cdot V^T \cdot E^{(0)}
+            $
+            \end{center}
+            \\
+            &
+            - Large singular values, strongly popularity-based
+
+            - Small singular values, fine-grained signals
+            \\
+            \textbf{Filter Function} & \\
+            \hline  
+            
+            $f$ modifies $\Sigma$ 
+            &
+            $
+                E^{(h)} = \hat{G} ^h \cdot E^{(0)} = V \cdot f(\Sigma)^h \cdot V^T \cdot E^{(0)}
+            $
+            \\
+        \end{tabular}
+    \end{minipage}
+};
+
+ \node[fancytitle, right=10pt] at (box.north west) {Graph Convolutional Networks};  
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture}
+    \node [mybox] (box){
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.70\textwidth} }
+                \textbf{GF-CF} & \\
+                \hline
+                &
+                - Observation:small singular values disappear
+               
+                - Idea: use truncated SVD to compute the similarity.
+                \\
+        
+            Normalize & 
+            $
+            \tilde{r}_{ui} = \frac{r_{ui}}{\sqrt{d_u d_i}}
+            $ \\
+            Compute item-item S: & 
+            $
+                S =\hat{R}^T \cdot  \hat{R} + \alpha D_I ^{-\frac{1}{2}} \cdot V_k \cdot V_k^T \cdot D_I ^{+\frac{1}{2}}
+            $ \\
+
+            Pros and Cons & 
+            \begin{itemize}[label={}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                \item[$\checkmark$] Fast computation of the similarity and very effective
+                \item[$\checkmark$] Flexible, change the exponent of the degree matrix
+                \item[$\times$] The similarity is dense (high memory requirement, slow prediction)
+                \item[$\times$] Applying KNN is difficult, large \# of neighbors
+            \end{itemize}
+        \end{tabular}
+    \end{minipage}
+};
+
+\node[fancytitle, right=10pt] at (box.north west) {Graph-Filter Collaborative Filtering};  
+\end{tikzpicture}

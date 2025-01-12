@@ -1,0 +1,106 @@
+\begin{tikzpicture}
+    \node[mybox] (box) {
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.65\textwidth} l}
+                Fuzzy Set &
+                A set whos membership function range on interval $[0,1]$
+                \\
+                Membership Function &
+                Defins a set by defining the degree of membership of an element of the universe of discourse.
+                \\
+                Frame of Cognition &
+                A set of fuzzy sets fully covering the universe of discourse(the range of variables)
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item Coverage
+                    \item Unimodality
+                \end{itemize}
+                \\
+                Fuzzy Partition &
+                A frame of cognition for which the sum of the membership values of each value of the base variable is equal to 1.
+                \\
+                $\alpha$-Cut &
+                Is the crisp set of the values of $x$ such that $\mu(X) \geq \alpha$
+                \begin{center}
+                    $\alpha \text{-cut}_\mu(X) = \{\mu(x) \geq \alpha\}$
+                \end{center}
+                \\
+                Support &
+                The crisp set of values $x \in X$ such that $\mu(x) > 0$
+                \\
+                Height of a Fuzzy Set &
+                The height of a fuzzy set $f$ is the highest membership degree of an element $x$ of the fuzzy set.
+                \begin{center}
+                    $h_f(X) = \max_{x \in X} \mu_f(x)$
+                \end{center}
+                \\
+                Normal Fuzzy Set &
+                A fuzzy set is normal $ \iff  h_f(X) = 1$
+                \\
+                Convex Fuzzy Set &
+                A fuzzy set is convex $ \iff \forall x_1, x_2 \in X, \forall \lambda \in [0,1]$
+                \begin{center}
+                    $\mu_f(\lambda x_1 + (1-\lambda)x_2) \geq \min(\mu_f(x_1), \mu_f(x_2))$
+                \end{center}
+            \end{tabular}
+        \end{minipage}
+    };
+
+    \node[fancytitle, right=10pt] at (box.north west) {Fuzzy Sets};
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+    \node[mybox] (box) {
+        \begin{minipage}{0.48\textwidth}
+            \begin{tabular}{lp{0.65\textwidth} l}
+                Fuzzy Logic &
+                Infinite-valued logic, with truth values is [0..1]
+                $
+                    A \text{ is } L
+                $
+                Where:
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item $A$ is a linguistic variable
+                    \item $L$ is a label of a fuzzy set
+                \end{itemize}
+                \\
+                Linguistic Variable &
+                A is $(X,T(X),U,G,M)$
+                Where:
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item $X$ is the universe of discourse
+                    \item $T(X)$ is the set of linguistic terms
+                    \item $U$ is the set of values of the linguistic variable
+                    \item $G$ is the semantic rule
+                    \item $M$ is the mapping of the semantic rule
+                \end{itemize}
+                \\
+                Fuzzy Modifiers &
+                A fuzzy modifier is a linguistic variable that is used to modify the meaning of a linguistic variable.
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item Strong Modifier
+                            - $m(a) \leq a \forall a \in [0 \ldots 1]$
+
+                            - Prediction stronger, decrease the truth value
+                    \item Weak Modifier
+                            - $m(a) \geq a \forall a \in [0 \ldots 1]$
+
+                            - Prediction weaker, increase the truth value
+                \end{itemize}
+                \\
+                Modifiers Properties &
+                \begin{itemize}[label={--}, topsep=0cm, parsep=0cm, itemsep=0cm]
+                    \item $m(0) = 0$ and $m(1) = 1$
+                    \item $m$ is a continuous function
+                    \item if $m$ is strong, $m^{-1}$ is weak and vice versa
+                    \item a composition of modifiers is a modifier. If both are of the same type, the result is of the same type
+                \end{itemize}
+                
+
+                
+            \end{tabular}
+        \end{minipage}
+    };
+
+    \node[fancytitle, right=10pt] at (box.north west) {Fuzzy Logic};
+\end{tikzpicture}
